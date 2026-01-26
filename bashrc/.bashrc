@@ -1,5 +1,8 @@
 # If not running interactively, don't do anything (leave this at the top of this file)
-[[ $- != *i* ]] && return
+if [[ $- == *i* ]]; then
+  # figlet Ghostty
+  fastfetch
+fi
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
