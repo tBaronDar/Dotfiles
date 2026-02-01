@@ -1,6 +1,7 @@
 #!/bin/sh
 
 . ./install-yay.sh
+. ./install-docker.sh
 . ./install-mise.sh
 . ./install-flatpak.sh
 . ./install-stow.sh
