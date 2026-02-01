@@ -1,2 +1,3 @@
 #!/bin/sh
 sudo pacman -S --needed --noconfirm mise
+mise install
