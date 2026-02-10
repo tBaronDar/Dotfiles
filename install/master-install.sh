@@ -16,3 +16,4 @@
 # flatpaks
 . ./install-stremio.sh
 . ./install-slack.sh
+. ./install-spotify.sh
