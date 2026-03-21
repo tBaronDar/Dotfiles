@@ -1,6 +1,6 @@
 [tools]
 java = "latest"
+maven = "latest"
 node = "25"
 npm = "latest"
 pre-commit = "latest"
-python = "latest"
