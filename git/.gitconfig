@@ -1,0 +1,9 @@
+[user]
+	email = thedarelis@gmail.com
+	name = Themis Darelis
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
+[push]
+  autoSetupRemote = true
