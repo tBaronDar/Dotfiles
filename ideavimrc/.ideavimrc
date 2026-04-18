@@ -1,0 +1,174 @@
+set scrolloff=10
+set incsearch
+set ignorecase
+set smartcase
+
+map Q gq
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+set surround
+set highlightedyank
+set sneak
+set NERDTree
+set easymotion
+set notimeout
+set which-key
+set relativenumber
+set visualbell
+
+""" Editing and Reloading the Config
+set clipboard+=unnamed
+set clipboard+=ideaput
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+""" The Escape button
+map <C-c> <Esc>
+
+""" The Leader Key
+let mapleader=" "
+
+""" Distraction Free Mode
+nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+
+" Display options
+map <leader>dd <action>(ToggleDistractionFreeMode)
+map <leader>dz <action>(ToggleZenMode)
+map <leader>df <action>(ToggleFullScreen)
+
+""" Navigation
+nnoremap <c-s>l :action SplitVertically<CR>
+nnoremap <c-s>j :action SplitHorizontally<CR>
+nnoremap <c-s>h :action Unsplit<CR>
+nnoremap <c-s>k :action Unsplit<CR>
+nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+nnoremap <TAB> :action PreviousTab<CR>
+nnoremap <s-TAB> :action NextTab<CR>
+nnoremap <Leader>en :action EditSourceInNewWindow<CR>
+nnoremap <Leader>n :action NextWindow<CR>
+nnoremap <Leader>q :action CloseContent<CR>
+nnoremap <Leader>Q :action CloseAllEditors<CR>
+
+""" Editing source code
+set ideajoin
+set idearefactormode=keep
+vnoremap < <gv
+vnoremap > >gv
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+nnoremap zc :action CollapseRegion<CR>
+nnoremap zo :action ExpandRegion<CR>
+nnoremap <leader>zc :action CollapseAllRegions<CR>
+nnoremap <leader>zo :action ExpandAllRegions<CR>
+nnoremap <leader>cc :action CommentByLineComment<CR>
+nnoremap <Leader>= :action ReformatCode<CR>
+nnoremap <leader>O :action OptimizeImports<CR>
+nnoremap <leader>i :action Generate<CR>
+nnoremap <leader>I :action aiplugin.custom.transform<CR>
+vnoremap <leader>I :action aiplugin.custom.transform<CR>
+nnoremap <leader>/ :action ShowErrorDescription<CR>
+nnoremap <c-K> :action MoveLineUp<CR>
+nnoremap <c-J> :action MoveLineDown<CR>
+nnoremap <c-a> :action ShowIntentionActions<CR>
+inoremap <c-a> :action ShowIntentionActions<CR>
+
+" File navigation
+map <leader>ff <action>(GotoFile)
+map <leader>fr <action>(RecentFiles)
+map <leader>fc <action>(FindInPath)
+map <leader>fa :action GotoAction<CR>
+map <leader>fl <action>(RecentLocations)
+map <leader>fs <action>(NewScratchFile)
+nnoremap <leader>H :action LocalHistory.ShowHistory<CR>
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
+
+" Refactoring
+map <leader>rn <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>rs <Action>(ChangeSignature)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+
+""" Searching and Source Code Navigation
+set incsearch
+nnoremap <c-/> :action FindInPath<CR>
+nnoremap <leader>u :action FindUsages<CR>
+nnoremap <leader>s :action GotoRelated<CR>
+nnoremap <leader>h :action CallHierarchy<CR>
+nnoremap <leader>b :action ShowNavBar<CR>
+nnoremap <leader>F :action SearchEverywhere<CR>
+nnoremap <leader>S :action FileStructurePopup<CR>
+nnoremap <c-o> :action GotoSymbol<CR>
+nnoremap gc :action GotoClass<CR>
+nnoremap gt :action GotoTest<CR>
+nnoremap gb :action Back<CR>
+nnoremap gf :action Forward<CR>
+nnoremap gu :action ShowUsages<CR>
+nnoremap gj :action QuickJavaDoc<CR>
+nnoremap gi :action QuickImplementations<CR>
+nnoremap gD :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action GotoTypeDeclaration<CR>
+
+""" Running and Debugging
+nnoremap ,r :action ContextRun<CR>
+nnoremap ,c :action RunClass<CR>
+nnoremap ,a :action ChooseRunConfiguration<CR>
+nnoremap ,t :action ActivateRunToolWindow<CR>
+nnoremap ,u :action Rerun<CR>
+nnoremap ,f :action RerunFailedTests<CR>
+nnoremap ,b :action ToggleLineBreakpoint<CR>
+nnoremap ,d :action ContextDebug<CR>
+nnoremap ,n :action ActivateDebugToolWindow<CR>
+nnoremap ,j :action StepOver<CR>
+nnoremap ,k :action StepOut<CR>
+nnoremap ,l :action StepInto<CR>
+nnoremap ,B :action CompileDirty<CR>
+vnoremap ,e :action EvaluateExpression<CR>
+nnoremap ,e :action EvaluateExpression<CR>
+
+" Maven
+nnoremap <leader>mr :action ExternalSystem.ProjectRefreshAction<CR>
+
+" Jump around with easymotion
+map <leader>j <Plug>(easymotion-s)
+
+" Git windows
+map <leader>gc <Action>(CheckinProject)
+map <leader>gs <Action>(ActivateVersionControlToolWindow)
+map <leader>gb <Action>(Git.Branches)
+map <leader>gm <Action>(Git.Menu)
+
+" Popup navigation
+"inoremap <C-j> <Action>(PopupMenu-selectNext)
+"inoremap <C-k> <Action>(PopupMenu-selectPrev)
+
+" Convertions
+nnoremap <leader>csc :action StringManipulation.ToSnakeCase<CR><Esc>
+vnoremap <leader>csc :action StringManipulation.ToSnakeCase<CR><Esc>
+nnoremap <leader>ccc :action StringManipulation.ToCamelCase<CR><Esc>
+vnoremap <leader>ccc :action StringManipulation.ToCamelCase<CR><Esc>
+
+""" Tool windows
+map <c-x> <action>(HideAllWindows)
+map <leader>pp <Action>(JumpToLastWindow)
+map <leader>pl <Action>(NextProjectWindow)
+map <leader>ph <Action>(PreviousProjectWindow)
+map <leader>o <Action>(ActivateStructureToolWindow)
+
+""" Terminal
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+"nnoremap <leader>t :action Terminal.OpenInTerminal<CR>
+
+" Open NERDTree (use q to exit)
+map <leader>t :NERDTreeToggle<CR>
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'
