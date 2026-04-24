@@ -1,5 +1,5 @@
 [tools]
-java = "latest"
+java = "25"
 maven = "latest"
 node = "25"
 npm = "latest"
