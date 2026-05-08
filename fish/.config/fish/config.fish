@@ -23,6 +23,7 @@ alias tunnel-startup="docker compose -f /home/themis/Coding/Tools/no-camunda-tun
 
 if status is-interactive
     if not set -q ZELLIJ
-        exec zellij
+        zellij
+        exit
     end
 end
