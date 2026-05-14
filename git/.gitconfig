@@ -3,6 +3,7 @@
 	name = Themis Darelis
 [core]
 	editor = nvim
+	excludesfile = ~/.gitignore_global
 [init]
 	defaultBranch = main
 [push]
