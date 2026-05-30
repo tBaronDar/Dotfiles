@@ -3,6 +3,11 @@
 -- Add any additional options here
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.wrap = true
+vim.opt.colorcolumn = "80"
+vim.opt.textwidth = 80
+vim.opt.linebreak = true
+vim.opt.breakindent = true
 
 -- LSP Server to use for Rust.
 -- Set to "bacon-ls" to use bacon-ls instead of rust-analyzer.
