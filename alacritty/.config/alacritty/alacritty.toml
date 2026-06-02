@@ -4,7 +4,7 @@ WINIT_X11_SCALE_FACTOR = "1"
 
 [window]
 dynamic_padding = true
-decorations = "none"
+decorations = "Full"
 title = "Alacritty@CachyOS"
 opacity = 0.95
 decorations_theme_variant = "Dark"
@@ -26,19 +26,19 @@ multiplier = 3
 size = 14
 
 [font.normal]
-family = "monospace"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "monospace"
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "monospace"
+family = "JetBrainsMono Nerd Font"
 style = "Italic"
 
 [font.bold_italic]
-family = "monospace"
+family = "JetBrainsMono Nerd Font"
 style = "Bold Italic"
 
 [selection]
