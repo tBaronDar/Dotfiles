@@ -1,6 +1,7 @@
 [tools]
-java = "25"
+fd = "latest"
+java = "temurin-11"
 maven = "latest"
-node = "25"
+node = "latest"
 npm = "latest"
-pre-commit = "latest"
+ripgrep = "latest"
