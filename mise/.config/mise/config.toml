@@ -1,6 +1,8 @@
 [tools]
+claude = "latest"
 java = "25"
 maven = "latest"
 node = "latest"
+opencode = "latest"
 # npm = "latest"
 pre-commit = "latest"
