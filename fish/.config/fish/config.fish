@@ -17,7 +17,7 @@ mise activate fish | source
 # alias ll='eza -l --color=always --group-directories-first --icons'  # long format
 # alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 # alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
-alias update='yay -Syu && flatpak update'
+alias update='sudo pacman -Syu && flatpak update -y \ mise upgrade'
 alias d-stop='docker stop $(docker ps -q)'
 alias tunnel-startup="docker compose -f /home/themis/Coding/Tools/no-camunda-tunnel/docker-compose-tunnel.yml up -d"
 
