@@ -20,3 +20,9 @@ set -e #stop on error
 ./install-stremio.sh
 #./install-slack.sh
 ./install-spotify.sh
+
+# stow
+./stow-packages.sh
+
+# mise
+mise install

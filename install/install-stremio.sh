@@ -1,3 +1,3 @@
 #!/bin/sh
 
-flatpak install flathub com.stremio.Stremio
+flatpak install -y flathub com.stremio.Stremio
