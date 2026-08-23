@@ -13,3 +13,5 @@
 	br = branch
 	ci = commit
 	st = status
+  ph = push
+  sw = switch
