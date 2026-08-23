@@ -10,19 +10,26 @@ set -e #stop on error
 ./install-dbeaver.sh
 ./install-neovim.sh
 ./install-zellij.sh
-#./install-obsidian.sh
+# ./install-obsidian.sh
+./install-eza.sh
+./install-wl-clipboard.sh
+./install-zoxide.sh
+./install-superfile.sh
 
 # AUR
-#./install-cursor.sh
-#./install-eza.sh
+# ./install-cursor.sh
 
 # flatpaks
 ./install-stremio.sh
-#./install-slack.sh
+# ./install-slack.sh
 ./install-spotify.sh
 
-# stow
+# dotfiles
 ./stow-packages.sh
+
+# runs after stow-packages.sh: ~/.config/alacritty must already be the
+# symlink into this repo before cloning into its themes/ subdir
+./install-alacritty-themes.sh
 
 # mise
 mise install

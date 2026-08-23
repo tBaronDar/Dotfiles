@@ -37,3 +37,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+-- Persist whatever colorscheme is active (e.g. picked via <leader>uC) so it
+-- survives restart. plugins/all-themes.lua reads this file to pick the
+-- startup colorscheme instead of a hardcoded name.
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("persist_colorscheme", { clear = true }),
+  desc = "Save the active colorscheme to disk for next startup",
+  callback = function()
+    local name = vim.g.colors_name
+    if not name or name == "" then
+      return
+    end
+    local file = io.open(vim.fn.stdpath("state") .. "/theme", "w")
+    if file then
+      file:write(name)
+      file:close()
+    end
+  end,
+})

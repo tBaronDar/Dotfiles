@@ -12,17 +12,18 @@ mise activate fish | source
 
 # Aliases
 # Replace ls with eza
-# alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
-# alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
-# alias ll='eza -l --color=always --group-directories-first --icons'  # long format
-# alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
-# alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
-alias update='sudo pacman -Syu && flatpak update -y \ mise upgrade'
+alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons' # long format
+alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
+alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 alias d-stop='docker stop $(docker ps -q)'
 alias tunnel-startup="docker compose -f /home/themis/Coding/Tools/no-camunda-tunnel/docker-compose-tunnel.yml up -d"
 
 if status is-interactive
-    if not set -q ZELLIJ
+    # skip in kitty: it has its own native tabs/splits, so auto-launching
+    # zellij there would just wrap one multiplexer inside another
+    if not set -q ZELLIJ; and not set -q KITTY_WINDOW_ID
         zellij
         exit
     end
