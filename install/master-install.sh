@@ -12,6 +12,9 @@ set -e #stop on error
 ./install-zellij.sh
 # ./install-obsidian.sh
 ./install-eza.sh
+./install-wl-clipboard.sh
+./install-zoxide.sh
+./install-superfile.sh
 
 # AUR
 # ./install-cursor.sh
