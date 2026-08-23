@@ -10,16 +10,19 @@ set -e #stop on error
 ./install-dbeaver.sh
 ./install-neovim.sh
 ./install-zellij.sh
-./install-obsidian.sh
+# ./install-obsidian.sh
+./install-eza.sh
 
 # AUR
-./install-cursor.sh
-./install-eza.sh
+# ./install-cursor.sh
 
 # flatpaks
 ./install-stremio.sh
-./install-slack.sh
+# ./install-slack.sh
 ./install-spotify.sh
 
 # dotfiles
 ./stow-packages.sh
+
+# mise
+mise install
