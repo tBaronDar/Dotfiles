@@ -27,5 +27,9 @@ set -e #stop on error
 # dotfiles
 ./stow-packages.sh
 
+# runs after stow-packages.sh: ~/.config/alacritty must already be the
+# symlink into this repo before cloning into its themes/ subdir
+./install-alacritty-themes.sh
+
 # mise
 mise install

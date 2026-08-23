@@ -3,6 +3,14 @@
 This repository contains personal configuration dotfiles for Arch-based Linux
 (CachyOS), pure Arch, or MacOS, managed with [GNU Stow](https://www.gnu.org/software/stow/). The repository is structured to allow easy deployment of these configurations across different machines and operating systems.
 
+## Themes good combos
+
+Tested color combinations for terminal, multiplexer, and editor:
+
+| zellij   | alacritty    | Neovim    |
+| -------- | ------------ | --------- |
+| nightfox | synthwave_84 | hackerman |
+
 ## Terminals
 
 Alacritty
