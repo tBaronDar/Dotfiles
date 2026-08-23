@@ -1,3 +1,3 @@
 #!/bin/sh
 
-flatpak install flathub com.slack.Slack
+flatpak install -y flathub com.slack.Slack
