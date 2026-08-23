@@ -1,3 +1,15 @@
+-- Startup colorscheme: whatever was last set via <leader>uC (persisted by the
+-- ColorScheme autocmd in config/autocmds.lua), falling back to tokyonight.
+local function startup_colorscheme()
+  local file = io.open(vim.fn.stdpath("state") .. "/theme", "r")
+  if not file then
+    return "tokyonight"
+  end
+  local name = file:read("*l")
+  file:close()
+  return name and name ~= "" and name or "tokyonight"
+end
+
 return {
   -- Load all theme plugins but don't apply them
   -- This ensures all colorschemes are available for hot-reloading
@@ -80,7 +92,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = startup_colorscheme(),
     },
   },
 }
