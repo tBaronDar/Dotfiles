@@ -21,7 +21,9 @@ alias d-stop='docker stop $(docker ps -q)'
 alias tunnel-startup="docker compose -f /home/themis/Coding/Tools/no-camunda-tunnel/docker-compose-tunnel.yml up -d"
 
 if status is-interactive
-    if not set -q ZELLIJ
+    # skip in kitty: it has its own native tabs/splits, so auto-launching
+    # zellij there would just wrap one multiplexer inside another
+    if not set -q ZELLIJ; and not set -q KITTY_WINDOW_ID
         zellij
         exit
     end
