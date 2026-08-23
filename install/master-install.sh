@@ -20,3 +20,6 @@ set -e #stop on error
 ./install-stremio.sh
 ./install-slack.sh
 ./install-spotify.sh
+
+# dotfiles
+./stow-packages.sh
