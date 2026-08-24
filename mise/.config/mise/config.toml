@@ -1,6 +1,6 @@
 [tools]
 fd = "latest"
-java = "temurin-11"
+java = "21"
 maven = "latest"
 node = "latest"
 npm = "latest"
