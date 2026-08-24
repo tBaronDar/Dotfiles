@@ -13,10 +13,6 @@ source ~/.local/share/omarchy/default/bash/rc
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 #
-export APPSERV=/home/themis/Work/appserv/
-export CAPSTONE=/home/themis/ESD/2nd-semester/capstone/
-export TOOLS=/home/themis/Coding/tools/
-export RUST=/home/themis/Coding/rust/
 
 # Aliases
 alias d-stop='docker stop $(docker ps -q)'

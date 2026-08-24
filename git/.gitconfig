@@ -8,3 +8,12 @@
 	defaultBranch = main
 [push]
   autoSetupRemote = true
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  ph = push
+  pu = pull
+  sw = switch
+  lg = log --oneline --graph --all --decorate

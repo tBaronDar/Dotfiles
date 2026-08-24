@@ -6,7 +6,7 @@ WINIT_X11_SCALE_FACTOR = "1"
 dynamic_padding = true
 decorations = "Full"
 title = "Alacritty@CachyOS"
-opacity = 0.95
+opacity = 0.97
 decorations_theme_variant = "Dark"
 startup_mode = "Maximized"
 
@@ -136,4 +136,4 @@ action = "ResetFontSize"
 [general]
 live_config_reload = true
 working_directory = "None"
-import = ["~/.config/alacritty/themes/themes/tokyo_night_enhanced.toml"]
+import = ["~/.config/alacritty/themes/themes/synthwave_84.toml"]
