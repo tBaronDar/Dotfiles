@@ -1,3 +1,13 @@
+local function startup_colortheme()
+  local file = io.open(vim.fn.stdpath("state") .. "/theme", "r")
+  if not file then
+    return "tokyonight"
+  end
+  local name = file:read("*l")
+  file:close()
+  return name and name ~= "" and name or "tokyonight"
+end
+
 return {
   -- Load all theme plugins but don't apply them
   -- This ensures all colorschemes are available for hot-reloading
@@ -80,7 +90,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = startup_colortheme(),
     },
   },
 }
