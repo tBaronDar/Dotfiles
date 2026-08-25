@@ -1,0 +1,6 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export FZF_CTRL_R_OPTS:\x2d\x2dpreview\x20\x27echo\x20\x7b\x7d\x27
+SETUVAR --export FZF_CTRL_T_OPTS:\x2d\x2dpreview\x20\x27bat\x20\x2d\x2dstyle\x3dnumbers\x20\x2d\x2dcolor\x3dalways\x20\x7b\x7d\x27
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dpreview\x20\x27bat\x20\x2d\x2dstyle\x3dnumbers\x20\x2d\x2dcolor\x3dalways\x20\x7b\x7d\x27\x20\x2d\x2dpreview\x2dwindow\x3dright\x3a60\x25\x3awrap
+SETUVAR fish_user_paths:/opt/homebrew/opt/openssl/bin
