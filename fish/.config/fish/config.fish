@@ -14,6 +14,8 @@ end
 zoxide init fish | source
 # initialize mise
 mise activate fish | source
+# Set up fzf key bindings
+fzf --fish | source
 
 # Aliases
 # Replace ls with eza
