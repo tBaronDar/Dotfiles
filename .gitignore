@@ -2,3 +2,8 @@
 # symlink into this repo, so without this the clone would get swallowed into
 # the Dotfiles git history as a nested repo (broken gitlink) again.
 /alacritty/.config/alacritty/themes/
+
+# Machine-generated fish universal-variable state (prompt plugin settings,
+# FZF_* opts already set by conf.d/fzf.fish, etc.) — regenerated locally by
+# fish itself, not meant to be hand-synced across machines.
+fish/.config/fish/fish_variables
