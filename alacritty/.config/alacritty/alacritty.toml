@@ -9,6 +9,10 @@ title = "Alacritty@CachyOS"
 opacity = 0.97
 decorations_theme_variant = "Dark"
 startup_mode = "Maximized"
+# macOS only, ignored elsewhere: without this, Option+key produces composed
+# characters (e.g. Option+C -> "ç") instead of sending the Alt/Meta escape
+# fish's alt-c fzf-cd-widget binding needs.
+option_as_alt = "Both"
 
 [window.dimensions]
 columns = 100
