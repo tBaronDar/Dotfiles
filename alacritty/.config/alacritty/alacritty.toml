@@ -136,7 +136,7 @@ action = "ResetFontSize"
 [general]
 live_config_reload = true
 working_directory = "None"
-import = ["~/.config/alacritty/themes/themes/synthwave_84.toml"]
+import = ["~/.config/alacritty/themes/themes/kanagawa_wave.toml"]
 
 [[keyboard.bindings]]
 key = "Return"
