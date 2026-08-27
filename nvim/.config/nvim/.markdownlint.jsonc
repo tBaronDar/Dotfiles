@@ -1,0 +1,6 @@
+{
+  // Global markdownlint rules overrodes, applied everywhere via
+  // lua/plugins/markdown-lint.lua regardless of per-project congig.
+  "MD013": false, // Line length
+  "MD033": false, // no-inline-html
+}
