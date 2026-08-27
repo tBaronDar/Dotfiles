@@ -300,7 +300,7 @@ web_client {
  // theme    "everforest-dark"
  // theme    "gruvbox-dark"
  // theme    "iceberg-dark"
- // theme    "kanagawa"
+ theme    "kanagawa"
  // theme    "lucario"
  // theme    "menace"
  // theme    "molokai-dark"
@@ -311,7 +311,7 @@ web_client {
  // theme    "onedark"
  // theme    "solarized-dark"
  // theme    "tokyo-night-dark"
- theme    "tokyo-night-storm"
+ // theme    "tokyo-night-storm"
  // theme    "tokyo-night"
  // theme    "vesper"
  //

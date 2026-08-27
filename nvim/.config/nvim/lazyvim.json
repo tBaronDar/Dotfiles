@@ -2,6 +2,7 @@
   "extras": [
     "lazyvim.plugins.extras.ai.copilot-native",
     "lazyvim.plugins.extras.ai.sidekick",
+    "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.editor.neo-tree",
     "lazyvim.plugins.extras.formatting.prettier",
     "lazyvim.plugins.extras.lang.java",
