@@ -27,6 +27,7 @@ Arch-based (CachyOS). Both Hyprland (`hypr/`) and KDE Plasma (`KDE/shortcuts.kks
 ### `work` — work Mac
 
 macOS. **Known gap — not yet actually adapted for macOS**: this branch still carries Linux-only artifacts inherited from `main`/`pure`, none of which function on macOS as committed:
+
 - `hypr/` — Hyprland is a Wayland compositor, Linux-only, cannot run on macOS.
 - `fish/.config/fish/config.fish` still does `source /usr/share/cachyos-fish-config/cachyos-config.fish` — a CachyOS-only path.
 - `install/*.sh` are unmodified `pacman`/`yay` scripts.
