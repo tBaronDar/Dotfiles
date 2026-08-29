@@ -1,0 +1,4 @@
+# Base lazygit config (no theme colors here).
+# Theme is layered on top at launch time by the `lazygit` fish function,
+# which merges this file with themes/<name>.yml via LG_CONFIG_FILE.
+# Pick a theme with `lazygit-theme`.

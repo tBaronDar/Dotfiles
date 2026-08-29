@@ -22,7 +22,7 @@ Arch-based (CachyOS). Both Hyprland (`hypr/`) and KDE Plasma (`KDE/shortcuts.kks
 
 - **Package installer**: `pacman` (core) + `yay` (AUR — `install-cursor.sh`, `install-eza.sh`) + `flatpak` (`install-stremio.sh`, `install-slack.sh`, `install-spotify.sh`). `install/master-install.sh` is unmodified and fully functional here.
 - **Terminal**: Alacritty (only terminal package in the repo). This branch's `alacritty.toml` has one binding not present on `work`/`pure`: `Shift+Return` sends a literal newline (`chars = "\r"`).
-- **Packages**: `KDE`, `alacritty`, `bashrc`, `fish`, `git`, `hypr`, `ideavimrc`, `install`, `mise`, `nvim`, `zellij`.
+- **Packages**: `KDE`, `alacritty`, `bashrc`, `fish`, `git`, `hypr`, `ideavimrc`, `install`, `lazygit`, `mise`, `nvim`, `zellij`.
 
 ### `work` — work Mac
 
@@ -91,3 +91,12 @@ Notable custom plugin specs:
 ## mise (`mise/`)
 
 `mise/.config/mise/config.toml` pins global tool versions for whatever branch/machine is checked out. The pinned tool list and versions currently differ between branches — see "Branches" above (e.g. `work` lacks `claude`, pins `node` to an exact version, and has `npm` active where `main`/`pure` comment it out). Treat it as the source of truth for that machine's global language/tool versions, not as identical across machines.
+
+## lazygit (`lazygit/`)
+
+`lazygit/.config/lazygit/config.yml` holds theme-agnostic settings only; colors live in separate files under `lazygit/.config/lazygit/themes/` (one per theme: `catppuccin-mocha.yml`, `gruvbox.yml`, `tokyonight.yml`, `nord.yml`, `dracula.yml`, `kanagawa-moon.yml`, `rose-pine.yml`, `everforest.yml`, `onedark.yml`), each setting just the `gui.theme` block. Switching themes doesn't edit `config.yml` — lazygit merges config files at launch via the `LG_CONFIG_FILE` env var (comma-separated paths, later files override earlier ones), so the two fish functions in `fish/.config/fish/functions/` do the layering instead:
+
+- `lazygit-theme.fish`: fzf-picks a theme by filename from `themes/`, writes the chosen name to `~/.config/lazygit/current_theme` (a runtime state file, not stowed/tracked in git).
+- `lazygit.fish`: wraps the real `lazygit` binary, reads `current_theme` if present, and launches with `LG_CONFIG_FILE` set to `config.yml,themes/<name>.yml` so the picked theme's colors are layered on top of the base config.
+
+To add a new theme, drop a `themes/<name>.yml` with just a `gui.theme` block — no other wiring needed, `lazygit-theme` discovers it automatically.

@@ -15,6 +15,7 @@ set -e #stop on error
 ./install-wl-clipboard.sh
 ./install-zoxide.sh
 ./install-superfile.sh
+./install-lazygit.sh
 
 # AUR
 # ./install-cursor.sh
