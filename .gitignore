@@ -2,3 +2,4 @@
 # symlink into this repo, so without this the clone would get swallowed into
 # the Dotfiles git history as a nested repo (broken gitlink) again.
 /alacritty/.config/alacritty/themes/
+/fish/.config/fish/fish_variables
