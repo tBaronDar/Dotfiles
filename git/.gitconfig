@@ -14,6 +14,6 @@
   co = checkout
   br = branch
   ph = push
-  pu = pull
+  pl = pull
   sw = switch
   lg = log --oneline --graph --all --decorate
