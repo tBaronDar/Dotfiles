@@ -1,6 +1,6 @@
 [user]
-	email = thedarelis@gmail.com
 	name = Themis Darelis
+	email = tdarelis@deloitte.gr
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
