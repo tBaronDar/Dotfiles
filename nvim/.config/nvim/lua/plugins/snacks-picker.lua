@@ -7,6 +7,9 @@ return {
           grep = {
             hidden = true,
           },
+          files = {
+            hidden = true,
+          },
         },
       },
     },

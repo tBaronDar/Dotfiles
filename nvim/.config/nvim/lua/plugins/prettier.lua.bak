@@ -1,0 +1,27 @@
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    css = { "prettier" },
+  },
+
+  formatters = {
+    prettier = {
+      command = "prettier",
+      args = {
+        "--config",
+        vim.fn.expand("~/.config/prettierrc.json"),
+        "--stdin-filepath",
+        "$FILENAME",
+      },
+    },
+  },
+
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})

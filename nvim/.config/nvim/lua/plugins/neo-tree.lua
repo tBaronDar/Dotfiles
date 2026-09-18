@@ -9,11 +9,11 @@ return {
         hide_gitignored = true,
         hide_by_name = {
           -- '.git',
-          -- '.DS_Store',
+          -- ".DS_Store",
           -- 'thumbs.db',
         },
-        never_show = { '.git' },
+        never_show = { ".git", ".DS_Store" },
       },
-    }
-  }
+    },
+  },
 }
