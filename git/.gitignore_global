@@ -1,3 +1,5 @@
 .DS_Store
 /.github/copilot-instructions.md
 .prettierrc.json
+_sass-helpers.scss
+.env
