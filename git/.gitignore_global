@@ -3,3 +3,4 @@
 .prettierrc.json
 _sass-helpers.scss
 .env
+CLAUDE.md

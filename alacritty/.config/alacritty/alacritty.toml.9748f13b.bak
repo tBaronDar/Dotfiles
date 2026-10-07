@@ -141,8 +141,3 @@ action = "ResetFontSize"
 live_config_reload = true
 working_directory = "None"
 import = ["~/.config/alacritty/themes/themes/kanagawa_dragon.toml"]
-
-[[keyboard.bindings]]
-key = "Return"
-mods = "Shift"
-chars = "\u001B\r"
