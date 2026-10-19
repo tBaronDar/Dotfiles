@@ -18,6 +18,7 @@ alias la='eza -a --color=always --group-directories-first --icons'  # all files 
 alias ll='eza -l --color=always --group-directories-first --icons'  # long format
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
+alias tree='eza -aT --color=always --group-directories-first --icons' # tree listing
 
 # Apps and programms
 #alias aem='/Applications/adobe/AEM/author/crx-quickstart/bin/quickstart'
