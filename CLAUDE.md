@@ -4,90 +4,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Personal dotfiles for Arch-based Linux (CachyOS), pure Arch, or MacOS managed
-with [GNU Stow](https://www.gnu.org/software/stow/). There is no build, lint, or
-test suite — this is configuration, not application code.
+Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/). There is no build, lint, or test suite — this is configuration, not application code.
 
-This file is identical across all branches (generic, machine-agnostic). Machine-specific detail lives in the "Branches" section below — read the subsection for whichever branch is checked out before assuming a package, script, or alias behaves the same way on another machine.
+## Branches: one per machine — this is `work`
 
-## Branches: one per machine
+The repo has one long-lived branch per physical machine: `main` (personal CachyOS laptop), `pure` (fresh Arch + KDE), and `work` (macOS work machine). Branches are never merged into each other, and their package sets, scripts, and even this file diverge.
 
-This repo tracks three branches, each the checkout for a specific physical machine — check out the matching branch on that machine rather than merging them together. Package sets, install scripts' correctness, and even alias/tool-version details diverge per branch; don't assume parity with another branch without checking.
+**This checkout is `work`. Only work on `work`; do not switch to or make changes for `main`/`pure`** (same rule as `.github/copilot-instructions.md`). If you need to know how something looks on another branch, read it without switching: `git show origin/main:<path>` / `git ls-tree --name-only origin/main`. Don't assume parity — e.g. `main` has `KDE`/`kitty`/`lazygit` packages and a CachyOS-based `config.fish` that `work` doesn't.
 
-`install/stow-packages.sh` auto-discovers whichever packages exist in the current checkout (see "Structure: Stow packages" below), so it doesn't need updating when packages are added or removed on a given branch.
+## `work` branch specifics (macOS)
 
-### `main` — personal laptop
+- **Shells**: `fish` (primary) and `zsh` are both Homebrew-based — they set up `brew shellenv` / the keg-only openssl path, init `zoxide` and `mise` (plus `fzf` in fish), define `eza`-based `ls`/`la`/`ll`/`lt` aliases, and auto-launch `zellij` when `$ZELLIJ` is unset (keep that guard when touching startup). Each has a `sysupdate` function (`fish/.config/fish/functions/sysupdate.fish`, `zsh/.config/zsh/functions/sysupdate.zsh`) running `brew update`, `brew upgrade`, `mise upgrade` with early return on failure (`or return 1` / `|| return 1`) — prefer that pattern over `&&` chains for new multi-step functions.
+- **Installer gap**: `install/*.sh` are copied unmodified from Linux (`pacman`, `yay`, `flatpak`, `systemctl`) and **do not run on macOS** — kept for reference only. Porting them to `brew` is the outstanding work. `install/stow-packages.sh` is the exception: plain POSIX `sh` (`stow`/`dirname`/`realpath`), works here as-is.
+- **Alacritty**: `Shift+Return` sends `\u001B\r` (ESC+CR, for multi-line input in TUIs). The window title is still hardcoded `"Alacritty@CachyOS"`.
+- **mise** (`mise/.config/mise/config.toml`): source of truth for this machine's global tool versions (java 21, node/npm latest, maven, `claude`, `copilot`, `npm:@playwright/mcp`, etc.). Differs from other branches by design.
+- **Other packages**: `prettier` (stows a global `~/.config/prettierrc.json`), `ideavimrc` (JetBrains IdeaVim), `bashrc`, `git`, `nvim`, `zellij`.
 
-Arch-based (CachyOS). Both Hyprland (`hypr/`) and KDE Plasma (`KDE/shortcuts.kksrc`) configs are present. Also the only branch with `ideavimrc/` (JetBrains + IdeaVim).
+## Stow packages
 
-- **Package installer**: `pacman` (core) + `yay` (AUR — `install-cursor.sh`, `install-eza.sh`) + `flatpak` (`install-stremio.sh`, `install-slack.sh`, `install-spotify.sh`). `install/master-install.sh` is unmodified and fully functional here.
-- **Terminal**: Alacritty (only terminal package in the repo). This branch's `alacritty.toml` has one binding not present on `work`/`pure`: `Shift+Return` sends a literal newline (`chars = "\r"`).
-- **Packages**: `KDE`, `alacritty`, `bashrc`, `fish`, `git`, `hypr`, `ideavimrc`, `install`, `mise`, `nvim`, `zellij`.
-
-### `work` — work Mac
-
-macOS. **Known gap — not yet actually adapted for macOS**: this branch still carries Linux-only artifacts inherited from `main`/`pure`, none of which function on macOS as committed:
-
-- `hypr/` — Hyprland is a Wayland compositor, Linux-only, cannot run on macOS.
-- `fish/.config/fish/config.fish` still does `source /usr/share/cachyos-fish-config/cachyos-config.fish` — a CachyOS-only path.
-- `install/*.sh` are unmodified `pacman`/`yay` scripts.
-
-- **Package installer**: intended to be Homebrew (`brew`), but not yet implemented — `install/*.sh` need a macOS rewrite (`brew install <pkg>` in place of `pacman`/`yay`/`flatpak`) before `master-install.sh` will actually work here. `install/stow-packages.sh` itself needs no porting — it's plain POSIX `sh` using only `stow`/`dirname`/`realpath`, all available via Homebrew/macOS base.
-- **Terminal**: Alacritty is the only terminal package stowed (same as other branches). `alacritty.toml` differs from `main`/`pure` only by lacking the Shift+Return binding; the window title is still hardcoded `"Alacritty@CachyOS"`.
-- **Shell**: `fish`'s `update` alias is `yay -Syu` (vs. pacman+flatpak+mise on `main`/`pure`) — also not yet adapted to `brew`.
-- **mise**: `mise/.config/mise/config.toml` pins `node = "25"` (exact, vs `"latest"` elsewhere), has `npm = "latest"` active (commented out on `main`/`pure`), and has no `claude` tool entry at all — reflects what's actually installed on this machine today, not yet reconciled with the other branches.
-- **Packages**: `alacritty`, `bashrc`, `fish`, `git`, `hypr`, `ideavimrc`, `install`, `mise`, `nvim`, `zellij` (no `KDE`).
-
-### `pure` — fresh/pure Arch install
-
-Arch Linux + KDE Plasma (`KDE/shortcuts.kksrc`). No `hypr/`, no `ideavimrc/` — deliberately trimmed (see commit "removed hyperland config files and ideavimrc").
-
-- **Package installer**: `pacman` + `yay` (AUR) + `flatpak` — same as `main`. `install/master-install.sh` is the reference implementation these scripts were written for, and is fully functional as committed (unlike `work`).
-- **Terminal**: Alacritty — `alacritty.toml` identical to `main`.
-- **Packages**: `KDE`, `alacritty`, `bashrc`, `fish`, `git`, `install`, `mise`, `nvim`, `zellij`.
-
-## Structure: Stow packages
-
-Each top-level directory except `install/` and `KDE/` is a Stow "package" whose contents mirror the layout it should have relative to `$HOME`. For example, `alacritty/.config/alacritty/alacritty.toml` stows to `~/.config/alacritty/alacritty.toml`. Which packages exist depends on the branch/machine — see "Branches" above (e.g. `hypr` and `ideavimrc` only exist on `main`/`work`).
-
-`install/stow-packages.sh` stows every package present in the current checkout automatically (see "Install scripts" below) — run it directly, or as the last step of `master-install.sh`. To deploy/remove a single package by hand instead:
+Every top-level directory except `install/` and `KDE/` (and dot-directories like `.github/`) is a Stow package whose contents mirror their location under `$HOME` — e.g. `nvim/.config/nvim` → `~/.config/nvim`.
 
 ```sh
-stow -d <repo-root> -t "$HOME" <package>       # e.g. stow -d ~/Dotfiles -t "$HOME" fish
-stow -D -d <repo-root> -t "$HOME" <package>    # unstow / remove the symlinks
+./install/stow-packages.sh                     # stow every package (runnable from anywhere)
+stow -d ~/Dotfiles -t "$HOME" <package>        # stow one package
+stow -D -d ~/Dotfiles -t "$HOME" <package>     # unstow one package
 ```
 
-`KDE/shortcuts.kksrc` is not stowed (no `.config`-mirroring subpath); it's a KDE shortcuts export kept for reference/manual import, and is excluded from `stow-packages.sh`'s discovery.
+`stow-packages.sh` auto-discovers packages (no edits needed when adding one). **It is destructive**: before stowing, it `rm -rf`s any pre-existing *real* (non-symlink) path in `$HOME` that a package owns, found by descending each package's top-level entries through single-subdirectory chains (e.g. `nvim/.config/nvim` → `~/.config/nvim`) so it never touches shared dirs like `~/.config`. Preserve that invariant when modifying it; when adding files to a package, check what that leaf-path walk will now resolve to.
 
 ## Install scripts (`install/`)
 
-Standalone `sh` scripts, one per tool, mostly thin `pacman -S --needed --noconfirm <pkg>` wrappers (a few use `yay` for AUR packages or `flatpak install`) — this pattern is only correct on `main`/`pure`; see "Branches" above for `work`'s macOS gap. `install/master-install.sh` runs all of them in sequence with `set -e`. When adding a new tool, follow the existing one-script-per-tool pattern and append it to `master-install.sh` in the right group (core tools vs. the `# AUR` / `# flatpaks` sections near the bottom).
+One thin script per tool; `master-install.sh` runs them with `set -e` by relative path, so run it from inside `install/`. When adding a tool, follow the one-script-per-tool pattern and put it in the right section of `master-install.sh`. Ordering matters: package installs → `stow-packages.sh` → `install-alacritty-themes.sh` (clones into `~/.config/alacritty/themes`, which must already be the stowed symlink; that path is gitignored to avoid a nested repo) → `mise install` last. Package removal isn't scripted.
 
-`install/stow-packages.sh` is the last step of `master-install.sh`: it discovers every top-level directory in the repo except `install/` and `KDE/` (and anything that isn't a real directory) and runs `stow -v -d <repo-root> -t "$HOME"` on each one, so one `master-install.sh` run both installs packages and symlinks all dotfiles for the current branch/machine. It resolves the repo root from its own script location, so it also works run standalone from anywhere. Before stowing each package, it deletes any pre-existing real (non-symlink) file or directory in `$HOME` that the package owns — e.g. a stock `.bashrc` from `/etc/skel`, or a `~/.config/nvim` full of default config from a fresh Neovim launch — so those get replaced by the repo's version instead of blocking stow. It does this by walking each package's own top-level entries down through single-subdirectory chains (e.g. `nvim/.config/nvim`) to find the package's leaf config path, so it only ever removes paths the package actually owns and never touches a shared directory like `~/.config` itself. It requires `stow` to already be installed — `install-stow.sh` runs earlier in `master-install.sh`. Unlike the package-installer scripts, it's plain POSIX `sh` with no distro-specific commands, so it works unmodified on every branch, including `work`.
-
-Package _removal_ isn't handled by any script yet — a natural future addition, but out of scope for now.
-
-## Shell setup (`fish/`)
-
-- `fish/.config/fish/config.fish` layers on top of `cachyos-fish-config` (sourced first). It initializes `zoxide` and `mise`, defines aliases, and auto-launches `zellij` on interactive shell start if not already inside one. Note: the `cachyos-fish-config` source line is CachyOS-specific — see `work`'s known gap under "Branches" above.
-- Custom functions live in `fish/.config/fish/functions/` (one file per function, e.g. `sysupdate.fish`). `sysupdate` wraps `pacman -Syu`, `flatpak update`, and `mise upgrade` with early-return on failure (`or return 1`) — prefer this pattern over `&&` chaining for new multi-step functions so partial failures are visible.
-- `fish/.config/fish/conf.d/` holds tool-specific fish snippets loaded automatically at shell start (e.g. `rustup.fish`).
-- The `update` alias is branch-specific — see "Branches" above for the exact command on each machine.
+Only available check: `sh -n install/*.sh` (syntax only — never execute the installers to test them).
 
 ## Neovim (`nvim/`)
 
-LazyVim-based config (`nvim/.config/nvim/lua/config/` for core options/keymaps/autocmds, `nvim/.config/nvim/lua/plugins/` for plugin specs, one file per concern). Enabled LazyVim extras are tracked in `lazyvim.json`.
+LazyVim config: core options/keymaps/autocmds in `lua/config/`, one plugin spec per concern in `lua/plugins/`, enabled extras in `lazyvim.json`, plugin pins in `lazy-lock.json`, Lua formatted per `stylua.toml`. Notable specs:
 
-Notable custom plugin specs:
+- `project-formatters.lua`: conform.nvim prefers a project's own formatter — `.oxfmtrc.json` (oxfmt), then `biome.json`/`.biome.json` (biome), else prettier — for js/jsx/ts/tsx/css.
+- `all-themes.lua` (multiple themes for runtime switching), `neo-tree.lua` (empty-buffer cleanup workaround), `markdown-lint.lua`, `groovyls.lua`, `snacks-picker.lua`, `disable-news-alert.lua`.
 
-- `plugins/project-formatters.lua`: makes `conform.nvim` prefer a project's own formatter over LazyVim's default prettier — checks for `.oxfmtrc.json` (oxfmt) then `biome.json`/`.biome.json` (biome) before falling back to prettier, for js/jsx/ts/tsx/css.
-- `plugins/omarchy-theme-hotreload.lua`, `plugins/all-themes.lua`: theme integration/hot-reload.
-- `plugins/disable-news-alert.lua`: suppresses LazyVim's news popup.
+## Git (`git/`)
 
-## Git config (`git/`)
-
-`git/.gitconfig` sets `core.excludesfile = ~/.gitignore_global` (stowed alongside it as `git/.gitignore_global`) and `push.autoSetupRemote = true`. Add new global ignore patterns to `.gitignore_global`, not to individual project `.gitignore` files, unless the pattern is project-specific.
-
-## mise (`mise/`)
-
-`mise/.config/mise/config.toml` pins global tool versions for whatever branch/machine is checked out. The pinned tool list and versions currently differ between branches — see "Branches" above (e.g. `work` lacks `claude`, pins `node` to an exact version, and has `npm` active where `main`/`pure` comment it out). Treat it as the source of truth for that machine's global language/tool versions, not as identical across machines.
+`.gitconfig` sets `core.excludesfile = ~/.gitignore_global` (stowed alongside as `git/.gitignore_global`), `push.autoSetupRemote = true`, and short aliases (`st`, `co`, `sw`, `lg`, …). Global ignore patterns go in `.gitignore_global`; the repo's own `.gitignore` covers only repo artifacts (cloned alacritty themes, fish's machine-generated `fish_variables`).
