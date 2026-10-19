@@ -3,4 +3,9 @@
 .prettierrc.json
 _sass-helpers.scss
 .env
+.mcp.json
 CLAUDE.md
+
+.playwright-mcp/
+
+**/.claude/settings.local.json
