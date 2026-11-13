@@ -11,4 +11,4 @@ Snacks.toggle({
     vim.lsp.inline_completion.enable(state)
     require("sidekick.nes").enable(state)
   end,
-}):map("<leader>uA")
+}):map("<leader>aA")

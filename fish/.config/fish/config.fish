@@ -20,7 +20,7 @@ alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 alias tree='eza -aT --color=always --group-directories-first --icons' # tree listing
 
 alias d-stop='docker stop $(docker ps -q)'
-alias tunnel-startup="docker compose -f /home/themis/Coding/Tools/no-camunda-tunnel/docker-compose-tunnel.yml up -d"
+alias tunnel-startup="docker compose -f /home/themis/Coding/Tools/utility-tunnel/docker-compose-tunnel.yml up -d"
 
 if status is-interactive
     # skip in kitty: it has its own native tabs/splits, so auto-launching
